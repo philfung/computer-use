@@ -1,11 +1,9 @@
 import asyncio
 import base64
 import os
-import shlex
-import shutil
 from enum import StrEnum
 from pathlib import Path
-from typing import Literal, TypedDict
+from typing import Any, Literal, TypedDict
 from uuid import uuid4
 
 from anthropic.types.beta import BetaToolComputerUse20241022Param
@@ -96,23 +94,21 @@ class ComputerTool(BaseAnthropicTool):
         self.width = int(os.getenv("WIDTH") or 0)
         self.height = int(os.getenv("HEIGHT") or 0)
         assert self.width and self.height, "WIDTH, HEIGHT must be set"
-        if (display_num := os.getenv("DISPLAY_NUM")) is not None:
-            self.display_num = int(display_num)
-            self._display_prefix = f"DISPLAY=:{self.display_num} "
-        else:
-            self.display_num = None
-            self._display_prefix = ""
+        self.display_num = None
 
-        self.xdotool = f"{self._display_prefix}xdotool"
+        try:
+            import pyautogui  # type: ignore
 
-    async def __call__(
-        self,
-        *,
-        action: Action,
-        text: str | None = None,
-        coordinate: tuple[int, int] | None = None,
-        **kwargs,
-    ):
+            self.pyautogui = pyautogui
+            self.pyautogui.FAILSAFE = True
+        except ImportError:
+            raise ToolError("pyautogui is required for computer control on MacOS")
+
+    async def __call__(self, **kwargs: Any) -> ToolResult:
+        action = kwargs.get("action")
+        text = kwargs.get("text")
+        coordinate = kwargs.get("coordinate")
+
         if action in ("mouse_move", "left_click_drag"):
             if coordinate is None:
                 raise ToolError(f"coordinate is required for {action}")
@@ -128,11 +124,13 @@ class ComputerTool(BaseAnthropicTool):
             )
 
             if action == "mouse_move":
-                return await self.shell(f"{self.xdotool} mousemove --sync {x} {y}")
+                self.pyautogui.moveTo(x, y)
+                return ToolResult()
             elif action == "left_click_drag":
-                return await self.shell(
-                    f"{self.xdotool} mousedown 1 mousemove --sync {x} {y} mouseup 1"
-                )
+                self.pyautogui.mouseDown()
+                self.pyautogui.moveTo(x, y)
+                self.pyautogui.mouseUp()
+                return ToolResult()
 
         if action in ("key", "type"):
             if text is None:
@@ -140,21 +138,16 @@ class ComputerTool(BaseAnthropicTool):
             if coordinate is not None:
                 raise ToolError(f"coordinate is not accepted for {action}")
             if not isinstance(text, str):
-                raise ToolError(output=f"{text} must be a string")
+                raise ToolError(message=f"{text} must be a string")
 
             if action == "key":
-                return await self.shell(f"{self.xdotool} key -- {text}")
+                self.pyautogui.press(text)
+                return ToolResult()
             elif action == "type":
-                results: list[ToolResult] = []
                 for chunk in chunks(text, TYPING_GROUP_SIZE):
-                    cmd = f"{self.xdotool} type --delay {TYPING_DELAY_MS} -- {shlex.quote(chunk)}"
-                    results.append(await self.shell(cmd, take_screenshot=False))
+                    self.pyautogui.write(chunk, interval=TYPING_DELAY_MS / 1000)
                 screenshot_base64 = (await self.screenshot()).base64_image
-                return ToolResult(
-                    output="".join(result.output or "" for result in results),
-                    error="".join(result.error or "" for result in results),
-                    base64_image=screenshot_base64,
-                )
+                return ToolResult(base64_image=screenshot_base64)
 
         if action in (
             "left_click",
@@ -172,25 +165,20 @@ class ComputerTool(BaseAnthropicTool):
             if action == "screenshot":
                 return await self.screenshot()
             elif action == "cursor_position":
-                result = await self.shell(
-                    f"{self.xdotool} getmouselocation --shell",
-                    take_screenshot=False,
-                )
-                output = result.output or ""
+                x, y = self.pyautogui.position()
                 x, y = self.scale_coordinates(
-                    ScalingSource.COMPUTER,
-                    int(output.split("X=")[1].split("\n")[0]),
-                    int(output.split("Y=")[1].split("\n")[0]),
+                    ScalingSource.COMPUTER, int(round(x)), int(round(y))
                 )
-                return result.replace(output=f"X={x},Y={y}")
+                return ToolResult(output=f"X={x},Y={y}")
             else:
-                click_arg = {
-                    "left_click": "1",
-                    "right_click": "3",
-                    "middle_click": "2",
-                    "double_click": "--repeat 2 --delay 500 1",
-                }[action]
-                return await self.shell(f"{self.xdotool} click {click_arg}")
+                click_map = {
+                    "left_click": lambda: self.pyautogui.click(button="left"),
+                    "right_click": lambda: self.pyautogui.click(button="right"),
+                    "middle_click": lambda: self.pyautogui.click(button="middle"),
+                    "double_click": lambda: self.pyautogui.doubleClick(),
+                }
+                click_map[action]()
+                return ToolResult()
 
         raise ToolError(f"Invalid action: {action}")
 
@@ -200,21 +188,15 @@ class ComputerTool(BaseAnthropicTool):
         output_dir.mkdir(parents=True, exist_ok=True)
         path = output_dir / f"screenshot_{uuid4().hex}.png"
 
-        # Try gnome-screenshot first
-        if shutil.which("gnome-screenshot"):
-            screenshot_cmd = f"{self._display_prefix}gnome-screenshot -f {path} -p"
-        else:
-            # Fall back to scrot if gnome-screenshot isn't available
-            screenshot_cmd = f"{self._display_prefix}scrot -p {path}"
-
+        # Use screencapture on MacOS
+        screenshot_cmd = f"screencapture -x {path}"
         result = await self.shell(screenshot_cmd, take_screenshot=False)
+
         if self._scaling_enabled:
             x, y = self.scale_coordinates(
                 ScalingSource.COMPUTER, self.width, self.height
             )
-            await self.shell(
-                f"convert {path} -resize {x}x{y}! {path}", take_screenshot=False
-            )
+            await self.shell(f"sips -z {y} {x} {path}", take_screenshot=False)
 
         if path.exists():
             return result.replace(
