@@ -12,9 +12,6 @@
                 "computer_use_demo/streamlit.py"
             ],
             "env": {
-                "PYTHONPATH": "${workspaceFolder}",
-                "WIDTH": "1352",
-                "HEIGHT": "878"
             },
             "justMyCode": false
         },

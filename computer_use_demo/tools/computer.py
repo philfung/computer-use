@@ -11,6 +11,7 @@ from anthropic.types.beta import BetaToolComputerUse20241022Param
 from .base import BaseAnthropicTool, ToolError, ToolResult
 from .run import run
 from ..debug import debug_msg, dump_obj
+from AppKit import NSScreen
 
 OUTPUT_DIR = "/tmp/outputs"
 
@@ -92,8 +93,8 @@ class ComputerTool(BaseAnthropicTool):
     def __init__(self):
         super().__init__()
 
-        self.width = int(os.getenv("WIDTH") or 0)
-        self.height = int(os.getenv("HEIGHT") or 0)
+        self.width = int(NSScreen.mainScreen().frame().size.width)
+        self.height = int(NSScreen.mainScreen().frame().size.height)
         assert self.width and self.height, "WIDTH, HEIGHT must be set"
         self.display_num = None
 

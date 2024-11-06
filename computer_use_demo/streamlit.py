@@ -62,6 +62,11 @@ def setup_state():
         st.session_state.api_key = load_from_storage("api_key") or os.getenv(
             "ANTHROPIC_API_KEY", ""
         )
+        if not st.session_state.api_key:
+            st.warning(
+                "No API key found. Enter your Anthropic API key in the sidebar to continue."
+            )
+
     if "provider" not in st.session_state:
         st.session_state.provider = (
             os.getenv("API_PROVIDER", "anthropic") or APIProvider.ANTHROPIC
