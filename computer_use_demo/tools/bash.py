@@ -5,6 +5,7 @@ from typing import ClassVar, Literal
 from anthropic.types.beta import BetaToolBash20241022Param
 
 from .base import BaseAnthropicTool, CLIResult, ToolError, ToolResult
+from ..debug import debug_msg, dump_obj
 
 
 class _BashSession:
@@ -95,7 +96,7 @@ class _BashSession:
         error = self._process.stderr._buffer.decode()  # pyright: ignore[reportAttributeAccessIssue]
         if error.endswith("\n"):
             error = error[:-1]
-
+        debug_msg(f"========Bash Tool=========\n: command: \n{command}\n: output: \n{output}\n: error: \n{error}")
         # clear the buffers so that the next output can be read correctly
         self._process.stdout._buffer.clear()  # pyright: ignore[reportAttributeAccessIssue]
         self._process.stderr._buffer.clear()  # pyright: ignore[reportAttributeAccessIssue]

@@ -4,6 +4,7 @@ Agentic sampling loop that calls the Anthropic API and local implementation of a
 
 from collections.abc import Callable
 from datetime import datetime
+from .debug import dump_obj, debug_msg
 from enum import StrEnum
 from typing import Any, cast
 
@@ -69,6 +70,7 @@ SYSTEM_PROMPT = f"""<SYSTEM_CAPABILITY>
 </IMPORTANT>"""
 
 
+
 async def sampling_loop(
     *,
     model: str,
@@ -128,6 +130,7 @@ async def sampling_loop(
         # implementation may be able call the SDK directly with:
         # `response = client.messages.create(...)` instead.
         try:
+            debug_msg(f"==============Calling API================\nMESSAGES: {dump_obj(messages)} \nTOOLS: {dump_obj(tool_collection.to_params())} \nSYSTEM: {dump_obj(system)} \nBETAS: {dump_obj(betas)}")
             raw_response = client.beta.messages.with_raw_response.create(
                 max_tokens=max_tokens,
                 messages=messages,
@@ -150,6 +153,9 @@ async def sampling_loop(
         response = raw_response.parse()
 
         response_params = _response_to_params(response)
+
+        debug_msg(f"==============RESPONSE================\nRESPONSE_PARAMS: {dump_obj(response_params)}")
+
         messages.append(
             {
                 "role": "assistant",

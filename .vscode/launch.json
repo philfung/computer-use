@@ -1,0 +1,32 @@
+// .vscode/launch.json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Streamlit",
+            "type": "python",
+            "request": "launch",
+            "module": "streamlit",
+            "args": [
+                "run",
+                "computer_use_demo/streamlit.py"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "WIDTH": "1352",
+                "HEIGHT": "878"
+            },
+            "justMyCode": false
+        },
+        {
+            "name": "Python: Attach to Streamlit",
+            "type": "python",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 5678
+            },
+            "justMyCode": false
+        }
+    ]
+}

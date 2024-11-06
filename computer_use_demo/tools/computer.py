@@ -10,6 +10,7 @@ from anthropic.types.beta import BetaToolComputerUse20241022Param
 
 from .base import BaseAnthropicTool, ToolError, ToolResult
 from .run import run
+from ..debug import debug_msg, dump_obj
 
 OUTPUT_DIR = "/tmp/outputs"
 
@@ -108,7 +109,7 @@ class ComputerTool(BaseAnthropicTool):
         action = kwargs.get("action")
         text = kwargs.get("text")
         coordinate = kwargs.get("coordinate")
-
+        debug_msg(f"COMPUTERTOOL: action: {action}, text: {text}, coordinate: {coordinate}")
         if action in ("mouse_move", "left_click_drag"):
             if coordinate is None:
                 raise ToolError(f"coordinate is required for {action}")
