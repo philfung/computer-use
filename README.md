@@ -22,19 +22,12 @@ Computer use is a [beta feature from Anthropic](https://docs.anthropic.com/en/do
 <img width="476" alt="Screenshot 2024-11-06 at 3 47 23 PM" src="https://github.com/user-attachments/assets/67e1a154-38bb-4c1b-9692-ccd382f4d470">
 
 
-3. Open 'Terminal', clone this repo, set up a Python virtual environment and install all requirements.
+3. Open the 'Terminal' app and install and run the application.
 ```bash
-git clone <this repository>
-python3 -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
-pip install -r dev-requirements.txt
+chmod u+x install_and_run.sh
+./install_and_run.sh
 ```
-3. Run the Streamlit application.
-```bash
-python -m streamlit run computer_use_demo/streamlit.py
-```
-The Computer Use Demo should automatically open in Chrome.
+The Computer Use Demo should automatically open in the Chrome browser.
 
 4. Enter your Anthropic API Key in the left panel of the application.
 
