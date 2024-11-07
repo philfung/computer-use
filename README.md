@@ -7,7 +7,7 @@ A macOS fork of [Anthropic's computer use demo](https://github.com/anthropics/an
 Computer use is a [beta feature from Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/computer-use) that has direct access to the internet and sends screenshots of your desktop to Anthropic. 
 
 ## Setup
-1. Ensure you have the latest [Python 3](https://www.python.org/downloads/) (>= 3.11) and [Chrome](https://www.google.com/chrome/dr/download/) installed.
+1. Ensure you have the latest [Python 3](https://www.python.org/downloads/) (>= 3.11) and [Chrome](https://www.google.com/chrome/dr/download/) installed, and an [Anthropic API key](https://console.anthropic.com/settings/keys).
 2. You need to enable extra permissions so that this application can control your mouse and keyboard.  
 * Open the *Settings* app->click on *Privacy and Security*->click on *Accessibility*.</br></br>
 &nbsp;&nbsp;<img width="75" alt="Screenshot 2024-11-06 at 3 48 30 PM" src="https://github.com/user-attachments/assets/67de19cc-cf7b-448c-a02c-52304e8d43f3">&nbsp;<img height="100" alt="Screenshot 2024-11-06 at 3 44 47 PM" src="https://github.com/user-attachments/assets/59c325d7-4e43-4272-8ac0-76323cd9dba7">&nbsp;<img height="100" alt="Screenshot 2024-11-06 at 3 45 02 PM" src="https://github.com/user-attachments/assets/eb497da7-e8c2-45a2-82c5-c6ceb49dee54">
@@ -19,7 +19,9 @@ Computer use is a [beta feature from Anthropic](https://docs.anthropic.com/en/do
 &nbsp;&nbsp;<img width="476" alt="Screenshot 2024-11-06 at 3 47 23 PM" src="https://github.com/user-attachments/assets/67e1a154-38bb-4c1b-9692-ccd382f4d470">
 
 
-3. Open the *Terminal* app and install and run the application.
+3. Open the *Terminal* app and run the install script.
+<img width="32" alt="Screenshot 2024-11-07 at 1 52 18 PM" src="https://github.com/user-attachments/assets/4fa5a963-9f26-4d22-9bac-6d5f81957000">
+
 ```bash
 chmod u+x install_and_run.sh
 ./install_and_run.sh
@@ -28,7 +30,7 @@ chmod u+x install_and_run.sh
 
 &nbsp;&nbsp;&nbsp;&nbsp;<img height="250" alt="Frame 1" src="https://github.com/user-attachments/assets/d1a4e615-ef1c-4045-a3d3-a4b38b636994">
 
-4. Enter your Anthropic API Key (get one [here](https://console.anthropic.com/settings/keys)) in the left panel of the application.
+4. Enter your [Anthropic API Key](https://console.anthropic.com/settings/keys) in the left panel of the application.
 
 &nbsp;&nbsp;&nbsp;&nbsp;<img height="200" alt="Screenshot 2024-11-06 at 3 55 11 PM" src="https://github.com/user-attachments/assets/9fb5ebbb-577e-4c1d-ab85-8fd876cfb2b8">
 
