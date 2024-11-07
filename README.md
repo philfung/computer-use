@@ -28,7 +28,7 @@ chmod u+x install_and_run.sh
 
 &nbsp;&nbsp;&nbsp;&nbsp;<img height="250" alt="Frame 1" src="https://github.com/user-attachments/assets/d1a4e615-ef1c-4045-a3d3-a4b38b636994">
 
-4. Enter your Anthropic API Key in the left panel of the application.
+4. Enter your Anthropic API Key (get one [here](https://console.anthropic.com/settings/keys)) in the left panel of the application.
 
 &nbsp;&nbsp;&nbsp;&nbsp;<img height="200" alt="Screenshot 2024-11-06 at 3 55 11 PM" src="https://github.com/user-attachments/assets/9fb5ebbb-577e-4c1d-ab85-8fd876cfb2b8">
 
