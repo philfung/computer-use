@@ -39,7 +39,7 @@ The Computer Use Demo should automatically open in Chrome.
 
 4. Enter your Anthropic API Key in the left panel of the application.
 
-<img height="100" alt="Screenshot 2024-11-06 at 3 55 11 PM" src="https://github.com/user-attachments/assets/9fb5ebbb-577e-4c1d-ab85-8fd876cfb2b8">
+<img height="200" alt="Screenshot 2024-11-06 at 3 55 11 PM" src="https://github.com/user-attachments/assets/9fb5ebbb-577e-4c1d-ab85-8fd876cfb2b8">
 
 5. Try computer use by entering commands!
 For example:
