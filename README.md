@@ -1,8 +1,7 @@
 # Computer Use for MacOS 💻
+This macOS version of [Anthropic's computer use demo](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) lets you experience its capabilities and limitations firsthand.
 
-This is a fork of [Anthropic's computer use demo](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) modified to run on macOS. It allows you to experience the power and limitations of computer use firsthand.
-
-<img height="300" alt="Screenshot 2024-11-06 at 3 52 59 PM" src="https://github.com/user-attachments/assets/d22cf7d3-3b72-41fb-a492-4d6404cea98d">
+<img height="450" alt="Frame 1" src="https://github.com/user-attachments/assets/d1a4e615-ef1c-4045-a3d3-a4b38b636994">
 
 ## Caution
 Computer use is a [beta feature from Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/computer-use) that has direct access to the internet and sends screenshots of your desktop to Anthropic. 
