@@ -1,4 +1,4 @@
-# Computer Use Demo for MacOS 💻
+# Computer Use for MacOS 💻
 
 This is a fork of [Anthropic's computer use demo](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) modified to run on macOS. It allows you to experience the power and limitations of computer use firsthand.
 
