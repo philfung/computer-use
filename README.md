@@ -27,8 +27,8 @@ Computer use is a [beta feature from Anthropic](https://docs.anthropic.com/en/do
 ### 4. Open the *Terminal* app and run the script.</br></br>
 ```bash
 # Do this in Terminal App
-git clone https://github.com/philfung/open-computer-use.git
-cd open-computer-use
+git clone https://github.com/philfung/computer-use.git
+cd computer-use
 chmod u+x install_and_run.sh
 ./install_and_run.sh
 ```
