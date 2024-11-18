@@ -5,7 +5,7 @@ from enum import StrEnum
 from pathlib import Path
 from typing import Any, Literal, TypedDict
 from uuid import uuid4
-
+import time
 from anthropic.types.beta import BetaToolComputerUse20241022Param
 
 from .base import BaseAnthropicTool, ToolError, ToolResult
@@ -111,6 +111,7 @@ class ComputerTool(BaseAnthropicTool):
         text = kwargs.get("text")
         coordinate = kwargs.get("coordinate")
         debug_msg(f"COMPUTERTOOL: action: {action}, text: {text}, coordinate: {coordinate}")
+        time.sleep(1)
         if action in ("mouse_move", "left_click_drag"):
             if coordinate is None:
                 raise ToolError(f"coordinate is required for {action}")
@@ -173,6 +174,7 @@ class ComputerTool(BaseAnthropicTool):
                 )
                 return ToolResult(output=f"X={x},Y={y}")
             else:
+                
                 click_map = {
                     "left_click": lambda: self.pyautogui.click(button="left"),
                     "right_click": lambda: self.pyautogui.click(button="right"),
