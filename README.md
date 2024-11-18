@@ -49,7 +49,7 @@ For example:
 "Open the Settings app and change to Dark mode"
 ```
 
-### Resources
+# Resources
 For more information, check out my [recommended reading list on computer use](https://github.com/philfung/awesome-computer-use).
 
  
