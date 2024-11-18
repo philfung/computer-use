@@ -1,5 +1,5 @@
 # Computer Use for MacOS 💻
-A macOS app (forked from [Anthropic's computer use demo for Ubuntu](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)) demonstrating LLM-based computer use on your laptop.
+A macOS app (forked from [Anthropic's computer use demo for Ubuntu](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)) demonstrating LLM-based computer use on your laptop.  
 
 <img height="400" alt="Frame 1" src="https://github.com/user-attachments/assets/d1a4e615-ef1c-4045-a3d3-a4b38b636994"></br></br>
 # Caution ⚠️
@@ -46,9 +46,11 @@ For example:
 "Open cnn.com and click on the latest article"
 
 
-"Open the Settings app and lower the screen brightness"
+"Open the Settings app and change to Dark mode"
 ```
 
+### Resources
+For more information, check out my [recommended reading list on computer use](https://github.com/philfung/awesome-computer-use).
 
  
 
