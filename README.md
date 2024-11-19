@@ -4,7 +4,7 @@ A macOS app (forked from [Anthropic's computer use demo for Ubuntu](https://gith
 <img height="400" alt="Frame 1" src="https://github.com/user-attachments/assets/d1a4e615-ef1c-4045-a3d3-a4b38b636994"></br>
 
 # Caution ⚠️
-Computer use is a [beta feature from Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/computer-use) that has direct access to the internet and sends screenshots of your desktop to Anthropic. 
+Computer use is a [beta feature from Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/computer-use) that has direct access to the internet and **sends screenshots of your desktop to Anthropic**. 
 </br></br>
 
 # Running the App
