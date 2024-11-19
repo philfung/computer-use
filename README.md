@@ -1,8 +1,7 @@
-# Computer Use for MacOS 💻
+# Computer Use for MacOS 💻 <img height="100" alt="Frame 1" src="https://github.com/user-attachments/assets/098bda06-9040-404e-a6da-71cb4e1bebcd">
 A macOS app (forked from [Anthropic's computer use demo for Ubuntu](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)) demonstrating LLM-based computer use on your laptop.  
 
 <img height="400" alt="Frame 1" src="https://github.com/user-attachments/assets/d1a4e615-ef1c-4045-a3d3-a4b38b636994"></br>
-</br>![dc2537cd-55ff-4130-8d15-15590d030e9a](https://github.com/user-attachments/assets/098bda06-9040-404e-a6da-71cb4e1bebcd)
 
 # Caution ⚠️
 Computer use is a [beta feature from Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/computer-use) that has direct access to the internet and sends screenshots of your desktop to Anthropic. 
