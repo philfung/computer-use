@@ -181,7 +181,18 @@ class ComputerTool(BaseAnthropicTool):
                     "middle_click": lambda: self.pyautogui.click(button="middle"),
                     "double_click": lambda: self.pyautogui.doubleClick(),
                 }
-                click_map[action]()
+                if action == "left_click":
+                    # click and click again to ensure the click is registered
+                    # sometimes MacOS needs the first click just to focus the window
+    
+                    self.pyautogui.mouseDown(duration=1.0)
+                    self.pyautogui.mouseUp()
+                    time.sleep(1)
+                    self.pyautogui.mouseDown(duration=1.0)
+                    self.pyautogui.mouseUp()
+
+                else:
+                    click_map[action]()
                 return ToolResult()
 
         raise ToolError(f"Invalid action: {action}")
