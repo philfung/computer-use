@@ -50,6 +50,9 @@ For example:
 "Open the Settings app and change to Dark mode"
 ```
 
+# Talks
+* [LLMs as Computer Users: An Overview](https://www.figma.com/deck/rsWK4sRl0dOahG59bfMhql)
+
 # Resources
 For more information, check out my [recommended reading list on computer use](https://github.com/philfung/awesome-computer-use).
 
